@@ -169,7 +169,7 @@ const Tablet = ({ }) => {
   const handleCorrect = () => {
     const imageData = fabricRef.current.toDataURL();
 
-    if (gameState.redTeam.includes(gameState.currentPlayer)) {
+    if (gameState.currentTeam == "red") {
       socket.emit('incrementRed');
       socket.emit('savedImage', "red", gameState.currentPlayer, currentWord(), imageData);
     }

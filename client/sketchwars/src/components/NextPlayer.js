@@ -9,8 +9,14 @@ const NextPlayer = ({ gameState }) => {
     if (!gameState)
         return "Loading..."
 
-    const teamcolour = gameState.redTeam.includes
-                    (gameState.currentPlayer)? "red-font" : "blue-font";
+    // const teamcolour = gameState.redTeam.includes
+    //                 (gameState.currentPlayer)? "red-font" : "blue-font";
+
+    let teamcolour = 'red-font'
+
+    const isObjPresent = gameState.redTeam.find((o) => o.name === gameState.currentPlayer)
+    if (!isObjPresent) { teamcolour = 'blue-font'}
+
 
     const handleClick = () => {
         socket.emit("startDrawing")

@@ -27,6 +27,7 @@ const TV = () => {
       socket.emit('joinGame', gameCode, 'TV', () => { })
     })
     socket.on('gameState', (data) => setGameState(data))
+    console.log(gameState)
     socket.on('newImageData', (data) => setImgData(data))
     socket.on('tabletDimensions', (data) => {
       tabletDimensions.current = data;

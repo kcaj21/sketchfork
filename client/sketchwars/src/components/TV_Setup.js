@@ -25,14 +25,14 @@ const TV_Setup = ({ gameState }) => {
             <div className="grid-container">
               <div className="red-column">
                 <h3 className="red-font">Red Team</h3>
-                {gameState.redTeam.map((playerName, index) => (
-                  <p key={index}>{playerName}</p>
+                {gameState.redTeam.map((player, index) => (
+                  <p key={index}>{player.name}</p>
                 ))}
               </div>
               <div className="blue-column">
                 <h3 className="blue-font">Blue Team</h3>
-                {gameState.blueTeam.map((playerName, index) => (
-                  <p key={index}>{playerName}</p>
+                {gameState.blueTeam.map((player, index) => (
+                  <p key={index}>{player.name}</p>
                 ))}
               </div>
             </div>

@@ -18,7 +18,7 @@ class Game {
         this.currentRoundNum = 1;
         this.isPaused = false;      // could refactor and make this a possible .status
         this.timer = null
-
+        this.currentTeam = ""
         this.TV = null;
         this.Tablet = null;
         this.savedImages = [];
@@ -112,12 +112,14 @@ class Game {
         });
 
         this.Tablet.on('incrementRed', () => {
+            this.redTeam[this.redTeam.findIndex(player => player.name === this.currentPlayer)].score++;
             this.redScore++;
             this.sendState();
         });
 
         this.Tablet.on('incrementBlue', () => {
-            this.blueScore++;
+            this.blueTeam[this.blueTeam.findIndex(player => player.name === this.currentPlayer)].score++;
+            this.blueScore++;   
             this.sendState()
         });
 
@@ -135,7 +137,7 @@ class Game {
         });
 
         this.Tablet.on("turnFinished", () => {
-            console.log(`${this.gameCode} ${this.player}'s turn finished early`);
+            console.log(`${this.gameCode} ${this.currentPlayer}'s turn finished early`); //changed this.player to this.currentPlayer on this line as this.player was console logging as undefined
             this.stopTimer();
             this.sendState();
             this.turnResolve();
@@ -173,11 +175,16 @@ class Game {
     async playRound() {
         const redPlayers = this.redTeam.slice();
         const bluePlayers = this.blueTeam.slice();
+        console.log(redPlayers)
+        console.log(bluePlayers)
+
 
         while (redPlayers.length > 0 || bluePlayers.length > 0) {
             if (redPlayers.length > 0)
-                await this.takeTurn(redPlayers.shift());
+                this.currentTeam = 'red'
+                await this.takeTurn(redPlayers.shift()); 
             if (bluePlayers.length > 0)
+                this.currentTeam = 'blue'
                 await this.takeTurn(bluePlayers.shift());
         }
     }
