@@ -5,7 +5,7 @@ const words = fs.readFileSync(path.resolve(__dirname, './words.txt'), 'utf-8').s
 
 class Game {
     constructor(code, onDelete) {
-        this.onDelete = onDelete
+        this.onDelete = onDelete;
         this.gameCode = code;
         this.status = "SETUP";  // SETUP, WAITING_FOR_PLAYER, DRAWING, RESULTS; 
         this.redTeam = [];
