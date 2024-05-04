@@ -8,7 +8,7 @@ const { Server } = require("socket.io");
 const Game = require("./game/Game");
 
 
-allowedOrigins = ["http://localhost:3000", "http://192.168.0.5:3000", "https://sketchwars.vercel.app"]
+allowedOrigins = ["http://localhost:3000", "https://sketchwars.vercel.app"]
 const app = express();
 app.use(cors({
     origin: allowedOrigins,

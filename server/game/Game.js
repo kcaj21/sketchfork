@@ -183,8 +183,8 @@ class Game {
     }
 
     async takeTurn(player) {
-        console.log(`selected ${player}`);
-        this.currentPlayer = player;
+        console.log(`selected ${player.name}`);
+        this.currentPlayer = player.name;
         const words = Game.getRandomWordArray(this.wordsPerTurn)
         this.turnWords = words.map(w => ({ word: w, guess: "unattempted" }))
         this.status = "WAITING_FOR_PLAYER";

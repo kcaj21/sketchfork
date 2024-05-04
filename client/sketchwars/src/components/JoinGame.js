@@ -33,8 +33,8 @@ const JoinGame = ({ onClose }) => {
     const [drawTime, setDrawTime] = useState(time[0].value);
     const [wordsPerTurn, setWordsPerTurn] = useState(0);
     const [name, setName] = useState("");
-    const [redTeam, setRedTeam] = useState(["alice", "bob"]);
-    const [blueTeam, setBlueTeam] = useState(["charlie", "david"]);
+    const [redTeam, setRedTeam] = useState([{ name: "alice", score: 0}, { name: "bob", score: 0}]);
+    const [blueTeam, setBlueTeam] = useState([{ name: "charlie", score: 0}, { name: "david", score: 0}]);
     const [joined, setJoined] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
 
@@ -72,10 +72,11 @@ const JoinGame = ({ onClose }) => {
     const handleWordsPerTurnChange = (event, newValue) => setWordsPerTurn(newValue);
 
     const handleTeamAdd = (event) => {
+        const newPlayer = { name: name, score: 0}
         if (event.target.name == "red")
-            setRedTeam([...redTeam, name]);
+            setRedTeam([...redTeam, newPlayer]);
         if (event.target.name == "blue")
-            setBlueTeam([...blueTeam, name]);
+            setBlueTeam([...blueTeam, newPlayer]);
         setName("");
     };
 
@@ -172,19 +173,19 @@ const JoinGame = ({ onClose }) => {
                 <div className="grid-container">
                     <div className="red-column">
                         <h3 className="red-font">Red Team</h3>
-                        {redTeam.map((playerName, index) =>
+                        {redTeam.map((player, index) =>
                             <p key={index}>
-                                <span>{playerName}</span>
-                                <span onClick={() => { setRedTeam(redTeam.filter((name) => name != playerName)) }}>X</span>
+                                <span>{player.name}</span>
+                                <span onClick={() => { setRedTeam(redTeam.filter((p) => p.name !== player.name)) }}>X</span>
                             </p>
                         )}
                     </div>
                     <div className="blue-column">
                         <h3 className="blue-font">Blue Team</h3>
-                        {blueTeam.map((playerName, index) =>
+                        {blueTeam.map((player, index) =>
                             <p key={index}>
-                                <span>{playerName}</span>
-                                <span onClick={() => { setBlueTeam(blueTeam.filter((name) => name != playerName)) }}>X</span>
+                                <span>{player.name}</span>
+                                <span onClick={() => { setBlueTeam(blueTeam.filter((p) => p.name !== player.name)) }}>X</span>
                             </p>
                         )}
                     </div>
