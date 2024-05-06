@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require("path");
+const { getGameSessions, getPlayers, createPlayer, getSessionID, createGameSession }  = require("../database/database");
 
 const words = fs.readFileSync(path.resolve(__dirname, './words.txt'), 'utf-8').split('\n');
 
@@ -138,7 +139,8 @@ class Game {
 
         this.Tablet.on("turnFinished", () => {
             console.log(`${this.gameCode} ${this.currentPlayer}'s turn finished early`); //changed this.player to this.currentPlayer on this line as this.player was console logging as undefined
-            this.stopTimer();
+            this.stopTimer();    
+
             this.sendState();
             this.turnResolve();
         });
@@ -172,12 +174,12 @@ class Game {
         this.endGame();
     }
 
-    async playRound() {
+    async playRound() {  
+
         const redPlayers = this.redTeam.slice();
         const bluePlayers = this.blueTeam.slice();
         console.log(redPlayers)
         console.log(bluePlayers)
-
 
         while (redPlayers.length > 0 || bluePlayers.length > 0) {
             if (redPlayers.length > 0)
@@ -203,9 +205,11 @@ class Game {
     endGame() {
         console.log(this.gameCode + " game ended")
         this.status = "RESULTS";
+        createGameSession(this.gameCode)
+        this.redTeam.forEach((player) => createPlayer(player.name, player.score, player.fastest_round, this.gameCode))
+        this.blueTeam.forEach((player) => createPlayer(player.name, player.score, player.fastest_round, this.gameCode))
         this.sendState()
     }
-
 
     startTimer(player, callback) {
         let startTime = Date.now();
@@ -231,8 +235,20 @@ class Game {
         this.timer = setTimeout(timerCallback, 1000);
     }
 
+    assignFastestRound(){
+        if (this.currentTeam == 'red' && this.redTeam[this.redTeam.findIndex(player => player.name === this.currentPlayer)].fastest_round > (this.drawTime - this.drawTimeLeft)) {
+            this.redTeam[this.redTeam.findIndex(player => player.name === this.currentPlayer)].fastest_round = this.drawTime - this.drawTimeLeft;
+            
+        } else if (this.currentTeam == 'blue' && this.blueTeam[this.blueTeam.findIndex(player => player.name === this.currentPlayer)].fastest_round > (this.drawTime - this.drawTimeLeft)) {
+            this.blueTeam[this.blueTeam.findIndex(player => player.name === this.currentPlayer)].fastest_round = this.drawTime - this.drawTimeLeft;
+        }
+
+    }
 
     stopTimer() {
+
+        this.assignFastestRound()
+
         if (this.timer) {
             clearTimeout(this.timer);
             this.timer = null;

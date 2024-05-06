@@ -33,8 +33,8 @@ const JoinGame = ({ onClose }) => {
     const [drawTime, setDrawTime] = useState(time[0].value);
     const [wordsPerTurn, setWordsPerTurn] = useState(0);
     const [name, setName] = useState("");
-    const [redTeam, setRedTeam] = useState([{ name: "alice", score: 0}, { name: "bob", score: 0}]);
-    const [blueTeam, setBlueTeam] = useState([{ name: "charlie", score: 0}, { name: "david", score: 0}]);
+    const [redTeam, setRedTeam] = useState([{ name: "alice", score: 0, fastest_round: 180}, { name: "bob", score: 0, fastest_round: 180}]);
+    const [blueTeam, setBlueTeam] = useState([{ name: "charlie", score: 0, fastest_round: 180}, { name: "david", score: 0, fastest_round: 180}]);
     const [joined, setJoined] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
 
@@ -72,7 +72,7 @@ const JoinGame = ({ onClose }) => {
     const handleWordsPerTurnChange = (event, newValue) => setWordsPerTurn(newValue);
 
     const handleTeamAdd = (event) => {
-        const newPlayer = { name: name, score: 0}
+        const newPlayer = { name: name, score: 0, fastest_round: 180}
         if (event.target.name == "red")
             setRedTeam([...redTeam, newPlayer]);
         if (event.target.name == "blue")

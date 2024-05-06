@@ -6,6 +6,7 @@ const cors = require("cors");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const Game = require("./game/Game");
+const { getGameSessions, getPlayers, createPlayer, getSessionID, createGameSession }  = require("./database/database");
 
 
 allowedOrigins = ["http://localhost:3000", "https://sketchwars.vercel.app"]
@@ -53,6 +54,27 @@ app.get('/api/games/:id/images', (req, res) => {
         res.json([]);
 });
 
+app.get("/game_sessions", async (req, res) => {
+    const game_sessions = await getGameSessions()
+    res.send(game_sessions)
+})
+
+app.get("/players", async (req, res) => {
+    const players = await getPlayers()
+    res.send(players)
+})
+
+app.post("/game_sessions", async (req, res) => {
+    const game_code = req.body
+    const game_session = await createGameSession(game_code)
+    res.status(201).send(game_session)
+})
+
+// app.post("/players", async (req, res) => {
+//     const { player_name, score, fastest_round, game_code } = req.body
+//     const player = await createPlayer(player_name, score, fastest_round, game_code)
+//     res.status(201).send(player)
+// })
 
 io.on("connection", (socket) => {
     console.log(`device connected from ${socket.handshake.address}`);
