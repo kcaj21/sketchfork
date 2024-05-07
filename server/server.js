@@ -64,11 +64,11 @@ app.get("/players", async (req, res) => {
     res.send(players)
 })
 
-app.post("/game_sessions", async (req, res) => {
-    const game_code = req.body
-    const game_session = await createGameSession(game_code)
-    res.status(201).send(game_session)
-})
+// app.post("/game_sessions", async (req, res) => {
+//     const game_code = req.body
+//     const game_session = await createGameSession(game_code)
+//     res.status(201).send(game_session)
+// })
 
 // app.post("/players", async (req, res) => {
 //     const { player_name, score, fastest_round, game_code } = req.body

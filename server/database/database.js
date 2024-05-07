@@ -23,14 +23,14 @@ async function createPlayer(player_name, score, fastest_round, game_code) {
     INSERT INTO players (
         player_name, score, fastest_round, session_id, date_played
         ) VALUES (
-        ?, ?, ?, (SELECT id FROM game_sessions WHERE game_code = ? ORDER BY completion_date DESC LIMIT 1),  NOW());
+        ?, ?, ?, (SELECT id FROM game_sessions WHERE game_code = ? ORDER BY completion_date DESC LIMIT 1),  CURDATE());
     `, [player_name, score, fastest_round, game_code])
     return result
 }
 
 async function createGameSession(game_code) {
     const result = await pool.query(`
-    INSERT INTO game_sessions (game_code, completion_date) VALUES (?, NOW());
+    INSERT INTO game_sessions (game_code, completion_date) VALUES (?, CURDATE());
     `, [game_code])
     return result
 }

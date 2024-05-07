@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS game_sessions;
 CREATE TABLE game_sessions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     game_code VARCHAR(255) NOT NULL,
-    completion_date DATETIME NOT NULL
+    completion_date DATE NOT NULL
 );
 
 CREATE TABLE players (
@@ -16,13 +16,13 @@ CREATE TABLE players (
     score INT NOT NULL,
     fastest_round INT NOT NULL,
     session_id INT,
-    date_played DATETIME NOT NULL,
+    date_played DATE NOT NULL,
     FOREIGN KEY (session_id) REFERENCES game_sessions(id)
 );
 
 
 
-INSERT INTO game_sessions (game_code, completion_date) VALUES ('VKFU', NOW());
+INSERT INTO game_sessions (game_code, completion_date) VALUES ('VKFU', CURDATE());
 INSERT INTO players (
     player_name, score, fastest_round, session_id, date_played
     ) VALUES (

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require("path");
-const { getGameSessions, getPlayers, createPlayer, getSessionID, createGameSession }  = require("../database/database");
+const { createPlayer, createGameSession }  = require("../database/database");
 
 const words = fs.readFileSync(path.resolve(__dirname, './words.txt'), 'utf-8').split('\n');
 
