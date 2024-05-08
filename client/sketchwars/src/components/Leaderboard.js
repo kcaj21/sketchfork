@@ -103,12 +103,14 @@ const Leaderboard = ( {onClose} ) => {
         return ( 
                 <tr key={session.id}>
                     <td>
-                        <button onClick={() => {handleGameCodeClick(session.id)}}>
+                        <button className='GameCodeBtn' onClick={() => {handleGameCodeClick(session.id)}}>
                             <div>
                             {session.game_code}
                             </div>
                         </button>
                     </td>
+                    <td>{session.red_score}</td>
+                    <td>{session.blue_score}</td>
                     <td>{formattedDatePlayed}</td>
                 </tr>
         )
@@ -154,10 +156,6 @@ const Leaderboard = ( {onClose} ) => {
                         </thead>
                         <tbody>
                             {playerItems}
-                            {playerItems}
-                            {playerItems}
-
-
                         </tbody>
                     </table>
                     : null }
@@ -167,12 +165,13 @@ const Leaderboard = ( {onClose} ) => {
                         <thead>
                             <tr>
                                 <th>Game Code</th>
+                                <th>Red Score</th>
+                                <th>Blue Score</th>
                                 <th>Date Played</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {sessionItems}
-                            
+                            {sessionItems}                            
                         </tbody>
                     </table>
                     : null}

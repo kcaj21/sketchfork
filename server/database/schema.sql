@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS game_sessions;
 CREATE TABLE game_sessions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     game_code VARCHAR(255) NOT NULL,
+    red_score INT,
+    blue_score INT,
     completion_date DATE NOT NULL
 );
 

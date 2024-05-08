@@ -20,6 +20,14 @@
     transform: scale(1.1);
   }
 
+  .GameCodeBtn {
+    font-family: "Indie Flower", cursive;
+    font-size: 1.2em;
+    border-radius: 20px;
+    width: 100px;
+    transition: all 0.3s;
+  }
+
   .BackBtnDiv {
     margin-top: 1%;
     display: flex;
@@ -64,6 +72,7 @@ td, th {
     padding: 8px;
     border-bottom: 1px solid #ddd;
     text-align: center;
+    font-size: 1.4em;
 }
 
 .scrolldiv {

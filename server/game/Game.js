@@ -205,7 +205,7 @@ class Game {
     endGame() {
         console.log(this.gameCode + " game ended")
         this.status = "RESULTS";
-        createGameSession(this.gameCode)
+        createGameSession(this.gameCode, this.redScore, this.blueScore)
         this.redTeam.forEach((player) => createPlayer(player.name, player.score, player.fastest_round, this.gameCode))
         this.blueTeam.forEach((player) => createPlayer(player.name, player.score, player.fastest_round, this.gameCode))
         this.sendState()

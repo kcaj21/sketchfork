@@ -28,10 +28,10 @@ async function createPlayer(player_name, score, fastest_round, game_code) {
     return result
 }
 
-async function createGameSession(game_code) {
+async function createGameSession(game_code, red_score, blue_score) {
     const result = await pool.query(`
-    INSERT INTO game_sessions (game_code, completion_date) VALUES (?, CURDATE());
-    `, [game_code])
+    INSERT INTO game_sessions (game_code, red_score, blue_score, completion_date) VALUES (?, ?, ?, CURDATE());
+    `, [game_code, red_score, blue_score])
     return result
 }
 
