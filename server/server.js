@@ -6,10 +6,10 @@ const cors = require("cors");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const Game = require("./game/Game");
-const { getGameSessions, getPlayers, createPlayer, getSessionID, createGameSession }  = require("./database/database");
+const { getGameSessions, getPlayers, getPlayersWithSessionID }  = require("./database/database");
 
 
-allowedOrigins = ["http://localhost:3000", "https://sketchwars.vercel.app"]
+allowedOrigins = ["http://localhost:3000", "https://sketchwars.vercel.app", "http://192.168.0.24:3000", "http://192.168.0.35:3000"]
 const app = express();
 app.use(cors({
     origin: allowedOrigins,
@@ -54,8 +54,14 @@ app.get('/api/games/:id/images', (req, res) => {
         res.json([]);
 });
 
-app.get("/game_sessions", async (req, res) => {
+app.get("/gamesessions", async (req, res) => {
     const game_sessions = await getGameSessions()
+    res.send(game_sessions)
+})
+
+app.get("/gamesessions/players/:id", async (req, res) => {
+    const session_id = req.params.id;
+    const game_sessions = await getPlayersWithSessionID(session_id)
     res.send(game_sessions)
 })
 

@@ -26,6 +26,17 @@ h2#howtoplay:hover {
   cursor: pointer;
 }
 
+h2#leaderboard {
+  font-size: 5vh;
+  transition: transform 0.3s;
+}
+
+h2#leaderboard:hover {
+  color: yellow;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
 
 #tvImage,
 #tabletImage {

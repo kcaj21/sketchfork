@@ -1,6 +1,3 @@
-body {
-    overflow: hidden;
-}
 
 .buttons {
     margin-top: 1%;
@@ -23,13 +20,31 @@ body {
     transform: scale(1.1);
   }
 
+  .BackBtnDiv {
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .BackBtn {
+    font-family: "Indie Flower", cursive;
+    font-size: 1.6em;
+    border-radius: 20px;
+    width: 200px;
+    transition: all 0.3s;
+    margin-left: 2%;
+  }
+
 .leaderboard {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
     justify-content: center;
-    margin-top: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     margin-left: 2%;
     margin-right: 2%;
     border: 1px solid;
@@ -53,7 +68,7 @@ td, th {
 
 .scrolldiv {
     overflow: auto;
-    max-height: 95vh; 
+    height: 80vh; 
     width: 100%; 
 }
 

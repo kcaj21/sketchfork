@@ -42,23 +42,15 @@ async function getSessionID(gameCode){
     return rows[0].session_id
 }
 
-// const sessionResult = await pool.query(`SELECT session_id FROM game_sessions WHERE game_code = 'VKFU'`);
-
-// async function main() {
-//     const code = 'VKFU'
-//     const sessionResult = await getSessionID(code)
-//     // const last_session_id = sessionResult[0].session_id;
-//     const result = await createPlayer('glen', 5, 40, sessionResult);
-//     console.log(result)
-//     console.log(sessionResult)
-
-// }
-
-// main()
+async function getPlayersWithSessionID(session_id){
+    const [rows] = await pool.query(`SELECT * FROM players WHERE session_id = ?;`, [session_id]);
+    return rows
+}
 
 module.exports = {
     getGameSessions,
     getPlayers,
+    getPlayersWithSessionID,
     createPlayer,
     getSessionID,
     createGameSession
