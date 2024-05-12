@@ -23,7 +23,7 @@ async function createPlayer(player_name, score, fastest_round, game_code) {
     INSERT INTO players (
         player_name, score, fastest_round, session_id, date_played
         ) VALUES (
-        ?, ?, ?, (SELECT id FROM game_sessions WHERE game_code = ? ORDER BY completion_date DESC LIMIT 1),  CURDATE());
+        ?, ?, ?, (SELECT session_id FROM game_sessions WHERE game_code = ? ORDER BY completion_date DESC LIMIT 1),  CURDATE());
     `, [player_name, score, fastest_round, game_code])
     return result
 }
@@ -35,16 +35,16 @@ async function createGameSession(game_code, red_score, blue_score) {
     return result
 }
 
+async function getPlayersWithSessionID(session_id){
+    const [rows] = await pool.query(`SELECT * FROM players WHERE session_id = ?;`, [session_id]);
+    return rows
+}
+
 async function getSessionID(gameCode){
     const [rows] = await pool.query(`SELECT session_id FROM game_sessions WHERE game_code = ? ORDER BY completion_date DESC LIMIT 1`, [gameCode]);
     console.log(rows)
     console.log(rows[0].session_id)
     return rows[0].session_id
-}
-
-async function getPlayersWithSessionID(session_id){
-    const [rows] = await pool.query(`SELECT * FROM players WHERE session_id = ?;`, [session_id]);
-    return rows
 }
 
 module.exports = {

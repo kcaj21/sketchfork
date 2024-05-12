@@ -59,28 +59,16 @@ app.get("/gamesessions", async (req, res) => {
     res.send(game_sessions)
 })
 
-app.get("/gamesessions/players/:id", async (req, res) => {
-    const session_id = req.params.id;
-    const game_sessions = await getPlayersWithSessionID(session_id)
-    res.send(game_sessions)
-})
-
 app.get("/players", async (req, res) => {
     const players = await getPlayers()
     res.send(players)
 })
 
-// app.post("/game_sessions", async (req, res) => {
-//     const game_code = req.body
-//     const game_session = await createGameSession(game_code)
-//     res.status(201).send(game_session)
-// })
-
-// app.post("/players", async (req, res) => {
-//     const { player_name, score, fastest_round, game_code } = req.body
-//     const player = await createPlayer(player_name, score, fastest_round, game_code)
-//     res.status(201).send(player)
-// })
+app.get("/gamesessions/players/:id", async (req, res) => {
+    const session_id = req.params.id;
+    const game_sessions = await getPlayersWithSessionID(session_id)
+    res.send(game_sessions)
+})
 
 io.on("connection", (socket) => {
     console.log(`device connected from ${socket.handshake.address}`);

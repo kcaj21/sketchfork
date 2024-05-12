@@ -103,7 +103,7 @@ const Leaderboard = ( {onClose} ) => {
         return ( 
                 <tr key={session.id}>
                     <td>
-                        <button className='GameCodeBtn' onClick={() => {handleGameCodeClick(session.id)}}>
+                        <button className='GameCodeBtn' onClick={() => {handleGameCodeClick(session.session_id)}}>
                             <div>
                             {session.game_code}
                             </div>

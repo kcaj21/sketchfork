@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS players;
 DROP TABLE IF EXISTS game_sessions;
 
 CREATE TABLE game_sessions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    session_id INT AUTO_INCREMENT PRIMARY KEY,
     game_code VARCHAR(255) NOT NULL,
     red_score INT,
     blue_score INT,
@@ -19,17 +19,5 @@ CREATE TABLE players (
     fastest_round INT NOT NULL,
     session_id INT,
     date_played DATE NOT NULL,
-    FOREIGN KEY (session_id) REFERENCES game_sessions(id)
+    FOREIGN KEY (session_id) REFERENCES game_sessions(session_id)
 );
-
-
-
-INSERT INTO game_sessions (game_code, completion_date) VALUES ('VKFU', CURDATE());
-INSERT INTO players (
-    player_name, score, fastest_round, session_id, date_played
-    ) VALUES (
-    'alice', 5, 30, (SELECT id FROM game_sessions WHERE game_code = 'VKFU' ORDER BY completion_date DESC LIMIT 1),  NOW());
-INSERT INTO players (player_name, score, fastest_round, session_id, date_played) VALUES ('john', 5, 40, (SELECT id FROM game_sessions WHERE game_code = 'VKFU' ORDER BY completion_date DESC LIMIT 1),  NOW());
-
-
---leaderboard table: player, highscore, no. of games won, fastest draw round

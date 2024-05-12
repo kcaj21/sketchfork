@@ -42,8 +42,6 @@ const Home = () => {
         playMenuSelectSound();
     };
 
-    
-
     const handleLeaderboardClick = () => {
         setShowLeaderboard(true);
         playMenuSelectSound();
