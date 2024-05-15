@@ -45,3 +45,89 @@ To access the app from a second device within your local network, you will to fi
 
 #### Handling CORS
 Since the app operates across origins, you'll need to add the same IP address you used to access the app on the second device to the `allowedOrigins` list in `server/server.js`. This step is necessary to avoid CORS (Cross-Origin Resource Sharing) issues.
+
+### Database Setup
+
+The database uses MySQL. If not already installed, here is how to do so:
+
+### Windows
+
+Download the installer from the following address: https://dev.mysql.com/downloads/mysql/
+
+When running the installer, at a minimum you should select to install MySQL Server and MySQL Shell
+
+Make a note of the password you set for MySQL during the installtion process.
+
+From the windows start menu, search for MySQL shell and run it. In the shell, enter the following:
+
+```
+\connect root@localhost:3306
+```
+
+You will be prompted to enter the password you set during the installation process, so do so and press enter.
+
+Now, copy the entire contents of the schema.sql file from this project into the shell and press enter, found in: server/database/schema.sql
+
+Finally, enter your MySQL password in the following code block in the database.js file, found in the same path: server/database/database.js
+
+```
+const pool = mysql.createPool({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '<YOUR_PASSWORD>',
+    database: 'game_stats'
+}).promise()
+```
+
+
+### MacOS
+
+### Via .dmg installer
+
+Download the Installer: https://dev.mysql.com/downloads/mysql/
+
+Install MySQL: Open the downloaded .dmg file and follow the installation wizard.
+
+After installation, enter the following in your terminal:
+
+```
+./mysql -u root -p
+```
+
+You will be prompted to enter the password you set during the installation process.
+
+Now, copy the entire contents of the schema.sql file from this project into the terminal and press enter, found in: server/database/schema.sql
+
+Finally, enter your MySQL password in the following code block in the database.js file, found in the same path: server/database/database.js
+
+```
+const pool = mysql.createPool({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '<YOUR_PASSWORD>',
+    database: 'game_stats'
+}).promise()
+```
+
+### Via Homebrew
+
+Enter in your terminal:
+
+```
+brew install
+```
+
+After installation is finished, enter:
+
+```
+brew services start mysql
+```
+
+To connect to MySQL, enter:
+
+```
+mysql -u root
+```
+
+Now, copy the entire contents of the schema.sql file from this project into the terminal and press enter, found in: server/database/schema.sql
+
